@@ -1,1 +1,1 @@
-# BayesianCompressedRegression
+# BayesianCME
