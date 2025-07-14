@@ -10,11 +10,11 @@ This repositary contains:
     ```
 
 2. **Others folder**
-
-    * `gendataMEM.R` contains the code to simulate clustered data with n subjects with m observations each, for different choices of random effects covariance matrix.
-    * `Sampler_OracleHS.R` contains the code for OracleHS, the Bayesian oracle competitor of CME, where the random effects covariance matrix is set to its true value and a Horseshoe prior is assigned on the fixed effects coefficient.
-    * `FanLi2012.R` contains the code for implementing the penalized quasi-likelihood method for fixed effects selection by Fan and Li (2012) [1].
-    * `LiCaiLi2021.R` contains the code implementing the penalized quasi-likelihood estimation and inference procedures for fixed effects selection by Li et al. (2021) [2], using their published supplementary code as a reference.
+    * contains codes to implement the competing methods.
+    * `gendataMEM.R` contains the code used to simulate clustered data with n subjects with m observations each, for different choices of random effects covariance matrix.
+    * `sampler_OracleHS.R` contains the code for OracleHS, the Bayesian oracle competitor of CME, where the random effects covariance matrix is set to its true value and a Horseshoe prior is assigned on the fixed effects coefficient.
+    * `fanli2012.R` contains the code for implementing the penalized quasi-likelihood method for fixed effects selection by Fan and Li (2012) [1].
+    * `licaili2021.R` contains the code implementing the penalized quasi-likelihood estimation and inference procedures for fixed effects selection by Li et al. (2021) [2], using their published supplementary code as a reference.
 
 ## References
 

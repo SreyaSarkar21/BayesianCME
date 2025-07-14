@@ -122,7 +122,7 @@ covg_fanli <- function(lasso_est, xtrain_sds, beta.true, n, m, intercept, standa
 }
 
 
-
+########### For Data Analysis ############
 fanli_fes <- function(ylist, xlist, zlist, capM) {
     library(Matrix)
     library(glmnet)
