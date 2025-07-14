@@ -1,14 +1,20 @@
 # Bayesian Compressed Mixed-Effects Models (CME)
 
-This repositary contains the R code for the simulation studies and riboflavinV100 data analysis.
+This repositary contains:
 
-## Files
+1. **R package cme**
+    - Implements the Bayesian Compressed Mixed-Effects (CME) Model.
+    - Install this library with:
+    ```r
+    devtools::install_github("SreyaSarkar21/BayesianCME")
+    ```
 
-* `gendataMEM.R` contains the code to simulate clustered data with n subjects with m observations each, for different choices of random effects covariance matrix.
-* `Sampler_CME.R` contains the code for the collapsed Gibbs sampler devised for posterior sampling of the parameters using CME model.
-* `Sampler_OracleHS.R` contains the code for OracleHS, the Bayesian oracle competitor of CME, where the random effects covariance matrix is set to its true value and a Horseshoe prior is assigned on the fixed effects coefficient.
-* `FanLi2012.R` contains the code for implementing the penalized quasi-likelihood method for fixed effects selection by Fan and Li (2012) [1].
-* `LiCaiLi2021.R` contains the code implementing the penalized quasi-likelihood estimation and inference procedures for fixed effects selection by Li et al. (2021) [2], using their published supplementary code as a reference.
+2. **Others folder**
+
+    * `gendataMEM.R` contains the code to simulate clustered data with n subjects with m observations each, for different choices of random effects covariance matrix.
+    * `Sampler_OracleHS.R` contains the code for OracleHS, the Bayesian oracle competitor of CME, where the random effects covariance matrix is set to its true value and a Horseshoe prior is assigned on the fixed effects coefficient.
+    * `FanLi2012.R` contains the code for implementing the penalized quasi-likelihood method for fixed effects selection by Fan and Li (2012) [1].
+    * `LiCaiLi2021.R` contains the code implementing the penalized quasi-likelihood estimation and inference procedures for fixed effects selection by Li et al. (2021) [2], using their published supplementary code as a reference.
 
 ## References
 

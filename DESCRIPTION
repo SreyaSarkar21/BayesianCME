@@ -1,0 +1,10 @@
+Package: cme
+Title: Bayesian Compressed Mixed-Effects Models
+Version: 0.0.0.9000
+Authors@R: 
+    person("Sreya", "Sarkar", , "sreya-sarkar@uiowa.edu", role = c("aut", "cre"))
+Description: Sampling-based Bayesian inference leveraging dimension reduction techniques for fixed effects selection and prediction in high-dimensional repeated-measures data analysis using linear mixed-effects models.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2.9000
