@@ -123,7 +123,7 @@ covg_fanli <- function(lasso_est, xtrain_sds, beta.true, n, m, intercept, standa
 
 
 ########### For Data Analysis ############
-fanli_fes <- function(ylist, xlist, zlist, capM) {
+fanli_fes <- function(ylist, xlist, zlist, standardize, intercept, std_response, capM) {
     library(Matrix)
     library(glmnet)
     zmat <- as.matrix(bdiag(zlist)) # N x nq
@@ -136,7 +136,8 @@ fanli_fes <- function(ylist, xlist, zlist, capM) {
     y_scaled <- Pz_half %*% y_train
     xmat_scaled <- Pz_half %*% xmat
     
-    cv.result <- cv.glmnet(xmat_scaled, y_scaled, alpha = 1)
+    cv.result <- cv.glmnet(xmat_scaled, y_scaled, alpha = 1,
+                           standardize = standardize, intercept = intercept, standardize.response = std_response)
     
     # lambda value chosen by 10-fold CV
     beta.hat.lmin <- as.vector(coef(cv.result, s = cv.result$lambda.min))
@@ -153,7 +154,7 @@ fanli_fes <- function(ylist, xlist, zlist, capM) {
 
 
 
-fanli_pred <- function(ylist, xlist, zlist, capM, standardize, intercept,
+fanli_pred <- function(ylist, xlist, zlist, capM, standardize, intercept, std_response,
                          newylist, newxlist, newzlist) {
     library(Matrix)
     library(glmnet)
@@ -168,7 +169,8 @@ fanli_pred <- function(ylist, xlist, zlist, capM, standardize, intercept,
     y_scaled <- Pz_half %*% y_train
     xmat_scaled <- Pz_half %*% xmat
     
-    cv.result <- cv.glmnet(xmat_scaled, y_scaled, alpha = 1, standardize = standardize, intercept = intercept)
+    cv.result <- cv.glmnet(xmat_scaled, y_scaled, alpha = 1,
+                           standardize = standardize, intercept = intercept, standardize.response = std_response)
     
     # lambda value chosen by 10-fold CV
     beta.hat.lmin <- as.vector(coef(cv.result, s = cv.result$lambda.min))
