@@ -1,15 +1,13 @@
-id <- as.numeric(commandArgs(TRUE))
-
 n <- 48 ## First 36 subjects used for training, next 12 subjects used for testing
 m <- c(4, 8, 12)
 p <- 300
 q <- 14
 A <- as.matrix(expand.grid(Rep = 1:50, m = c(4, 8, 12)), ncol = 2)
 
-genData <- function(N, n, p, q, tau2, ranef_covtype = "diag_psd", fixef_corr = "Indep", myseed) {
+genData <- function(N, n, p, q, tau2, ranef_covtype = "diag_psd", fixef_corr = "Indep", seedval) {
     library(matrixStats)
     library(Matrix)
-    set.seed(myseed)
+    set.seed(seedval)
     
     m <- N / n ## cluster size
     
@@ -81,9 +79,3 @@ genData <- function(N, n, p, q, tau2, ranef_covtype = "diag_psd", fixef_corr = "
     )
 }
 
-
-data <- genData(N = 48 * A[id, 2], n = 48, p = 300,
-                 q = 14, tau2 = 0.01, myseed = A[id, 1])
-
-filename <- paste0("~/data_Rep_", A[id, 1], "_n_36_m_", A[id, 2], "_p_", p, "_q_", q, ".rds")
-save(data, file = filename)
