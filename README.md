@@ -17,6 +17,7 @@ This repositary contains:
     * `fanli2012.R` contains the code for implementing the penalized quasi-likelihood method for fixed effects selection by [1].
     * `licaili2021.R` contains the code implementing the penalized quasi-likelihood estimation and inference procedures for fixed effects selection by [2], using their published supplementary code as a reference.
     * `S2M.R` contains the [code](https://github.com/hlstat/Sequential-2-Means/blob/master/S2M.R) implementing the sequential-2-means algorithm by [3] for fixed effects selection.
+    * `ExampleCME.R` contains example on how to implement the CME model.
     * The riboflavinV100 data[4] used for benchmarking is available to download [here](https://www.annualreviews.org/content/journals/10.1146/annurev-statistics-022513-115545#supplementary_data).
 
 ## References
