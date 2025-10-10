@@ -7,6 +7,7 @@ This repositary contains:
     - Install this library with:
     ```r
     devtools::install_github("SreyaSarkar21/BayesianCME")
+    library(cme)
     ```
 
 
