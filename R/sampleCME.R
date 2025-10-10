@@ -59,13 +59,15 @@ sampleCME <- function(ylist, xlist, zlist, a0, b0, gammaVar0,
     startTime <- proc.time()
     for(its in 1:niter) {
         if(its %% 1000 == 0) cat("iteration: ", its, "\n")
-        cycle1Samp <- sampleCycle_1(ylist, xlist, zlist,
-                                    beta, errVar, Gamma, Sigma_gamma, R, S)
+        cycle1Samp <- sampleCycle_1(ylist = ylist, xlist = xlist, zlist = zlist,
+                                    beta = beta, errVar = errVar,
+                                    Gamma = Gamma, Sigma_gamma = Sigma_gamma, R = R, S = S)
         Gamma <- matrix(cycle1Samp$gammaSamp, k1, k2)
 
-        cycle2Samp <- sampleCycle_2(ylist, xlist, zlist,
-                                    beta, errVar, a0, b0, lambda2, delta2, nu, xi,
-                                    cycle1Samp$gammaSamp, R, S)
+        cycle2Samp <- sampleCycle_2(ylist = ylist, xlist = xlist, zlist = zlist,
+                                    beta = beta, errVar = errVar, a0 = a0, b0 = b0,
+                                    lambda2 = lambda2, delta2 = delta2, nu = nu, xi = xi,
+                                    gammaSamp = cycle1Samp$gammaSamp, R = R, S = S)
         beta <- cycle2Samp$betaSamp
         errVar <- cycle2Samp$errVarSamp
         lambda2 <- cycle2Samp$lambda2Samp
@@ -145,10 +147,10 @@ sampleCycle_1 <- function(ylist, xlist, zlist, beta, errVar, Gamma, Sigma_gamma,
 #' @param ylist a list of response vectors where the \eqn{i^{th}} component contains \eqn{m_i} observations for the \eqn{i^{th}} subject.
 #' @param xlist a list of fixed effect covariates where the \eqn{i^{th}} component contains \eqn{m_i \times p} design matrix for the \eqn{i^{th}} subject.
 #' @param zlist a list of random effect covariates where the \eqn{i^{th}} component contains \eqn{m_i \times q} design matrix for the \eqn{i^{th}} subject.
-#' @param a0 shape hyperparameter for inverse-gamma prior for error variance.
-#' @param b0 scale hyperparameter for inverse-gamma prior for error variance.
 #' @param beta a \eqn{p}-dimensional vector for beta value from previous iteration.
 #' @param errVar error variance value from previous iteration.
+#' @param a0 shape hyperparameter for inverse-gamma prior for error variance.
+#' @param b0 scale hyperparameter for inverse-gamma prior for error variance.
 #' @param lambda2 \eqn{p}-dimensional vector for squared local shrinkage parameter values from previous iteration.
 #' @param delta2 global shrinkage parameter value from previous iteration.
 #' @param nu a \eqn{p}-dimensional vector for auxiliary variable \eqn{\nu_{j}}'s from previous iteration.
@@ -157,8 +159,8 @@ sampleCycle_1 <- function(ylist, xlist, zlist, beta, errVar, Gamma, Sigma_gamma,
 #' @param S \eqn{k_1 \times q} random projection matrix with entries iid from a Gaussian distribution with mean 0 and variance \eqn{1/k_1}.
 #' @param R \eqn{k_2 \times q} random projection matrix with entries iid from a Gaussian distribution with mean 0 and variance \eqn{1/k_2}.
 
-sampleCycle_2 <- function(ylist, xlist, zlist, a0, b0,
-                          beta, errVar, lambda2, delta2, nu, xi,
+sampleCycle_2 <- function(ylist, xlist, zlist,
+                          beta, errVar, a0, b0, lambda2, delta2, nu, xi,
                           gammaSamp, R, S) {
 
     n <- length(ylist)
