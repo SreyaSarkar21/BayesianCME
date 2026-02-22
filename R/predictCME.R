@@ -29,11 +29,13 @@ predictCME <- function(sampler_res, ylist_test, xlist_test, zlist_test,
     yhat_samples <- vector("list", n_test)
     lower_pi <- vector("list", n_test)
     upper_pi <- vector("list", n_test)
+    
+    comp_zlist <- lapply(zlist_test, function(foo) {tcrossprod(foo, S)})
 
     for (gg in 1:n_test) {
         yihat_iters <- list()
         for (tt in 1:length(sampler_res$errVarSamp)) {
-            predCov <- sampler_res$errVarSamp[tt] * (tcrossprod(tcrossprod(zlist_test[[gg]], S) %*% matrix(sampler_res$gammaSamp[tt, ], k1, k2) %*% R) +
+            predCov <- sampler_res$errVarSamp[tt] * (tcrossprod(comp_zlist[[gg]] %*% matrix(sampler_res$gammaSamp[tt, ], k1, k2) %*% R) +
                                                  diag(1, length(ylist_test[[gg]])))
             yihat_iters[[tt]] <- xlist_test[[gg]] %*% sampler_res$betaSamp[tt, ] + drop(crossprod(chol(predCov), rnorm(length(ylist_test[[gg]]))))
         }
@@ -44,8 +46,8 @@ predictCME <- function(sampler_res, ylist_test, xlist_test, zlist_test,
 
         grpvec <- 1:length(ylist_test[[gg]])
 
-        lower_pi[[gg]] <- apply(yhat_samples, 1, function(u) quantile(u, (1 - nom.level)/2))
-        upper_pi[[gg]] <- apply(yhat_samples, 1, function(u) quantile(u, 1 - (1 - nom.level)/2))
+        lower_pi[[gg]] <- apply(yhat_samples[[gg]], 1, function(u) quantile(u, (1 - nom.level)/2))
+        upper_pi[[gg]] <- apply(yhat_samples[[gg]], 1, function(u) quantile(u, 1 - (1 - nom.level)/2))
     }
 
     mspe <- mean(unlist(lapply(resids, function(foo) {mean(foo ^ 2)})))
